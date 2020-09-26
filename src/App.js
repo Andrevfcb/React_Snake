@@ -32,6 +32,7 @@ class App extends Component {
   componentDidUpdate() {
     this.checkIfEat();
     this.checkIfOutOfBorder();
+    this.checkIfCollapsed();
   }
 
   moveSnake = () => {
@@ -90,11 +91,23 @@ class App extends Component {
     
    }
 
-   checkIfOutOfBorder = () => {
+  checkIfOutOfBorder = () => {
     let snake = [...this.state.snakeDots]
     let head = snake[snake.length - 1];
-    if(head[0] == 100 || head[1] == 100 || head[0] < 0|| head[1] < 0) return (
-      alert("GAMEOVER!"),
+    if(head[0] == 100 || head[1] == 100 || head[0] < 0|| head[1] < 0) return this.onGameOver();
+   }
+
+  checkIfCollapsed = () => {
+    let snake = [...this.state.snakeDots];
+    let head = snake[snake.length - 1];
+    snake.pop();
+    snake.forEach(dot => {
+      if(head[0] == dot[0] && head[1] == dot[1]) return this.onGameOver();
+    })
+  }
+
+  onGameOver() {
+    alert("GAMEOVER!")
       this.setState({
         snakeDots: [
           [0,0],
@@ -104,8 +117,7 @@ class App extends Component {
         food: randomFood(),
         direction: "RIGHT"
       })
-    )
-   }
+  }
 
   render() {
   return (
