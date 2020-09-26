@@ -15,3 +15,11 @@
   height: 2%;
   border-radius: 50%;
 }
+
+.snake-food {
+  position: absolute;
+  background-color: darkgoldenrod;
+  width: 2%;
+  height: 2%;
+  border-radius: 50%;
+}
