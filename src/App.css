@@ -7,3 +7,11 @@
   left: 50vw;
   transform: translate(-50%, -50%);
 }
+
+.snake-dot {
+  position: absolute;
+  background-color: forestgreen;
+  width: 2%;
+  height: 2%;
+  border-radius: 50%;
+}
