@@ -3,7 +3,14 @@ import './App.css';
 import Snake from './Snake';
 import Food from './Food';
 
-
+const randomFood = () => {
+  let max = 98;
+  let x = Math.floor(Math.random()* (max/2))*2;
+  let y = Math.floor(Math.random()* (max/2))*2;
+  console.log(x);
+  console.log(y);
+  return [x,y]
+}
 
 class App extends Component {
 
@@ -13,13 +20,17 @@ class App extends Component {
       [2,0],
       [4,0],
     ],
-    food: [6,6],
+    food: randomFood(),
     direction: "RIGHT"
   }
 
   componentDidMount() {
     setInterval(this.moveSnake, 100);
     document.onkeydown = this.onKeyDown;
+  }
+
+  componentDidUpdate() {
+    this.checkIfEat();
   }
 
   moveSnake = () => {
@@ -62,6 +73,21 @@ class App extends Component {
          break;
     }
   }
+
+  checkIfEat = () => {
+    let snake = [...this.state.snakeDots]
+    let head = snake[snake.length - 1];
+    let food = this.state.food;
+    if(head[0] == food[0] && head[1] == food[1]) return (
+      this.setState({
+        food: randomFood()
+      }),
+      snake.unshift([]),
+      this.setState({
+        snakeDots: snake
+      }))
+    
+   }
 
   render() {
   return (
