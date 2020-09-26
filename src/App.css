@@ -1,0 +1,9 @@
+.game-area {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  border: 2px solid black;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+}
