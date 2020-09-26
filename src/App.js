@@ -31,6 +31,7 @@ class App extends Component {
 
   componentDidUpdate() {
     this.checkIfEat();
+    this.checkIfOutOfBorder();
   }
 
   moveSnake = () => {
@@ -87,6 +88,23 @@ class App extends Component {
         snakeDots: snake
       }))
     
+   }
+
+   checkIfOutOfBorder = () => {
+    let snake = [...this.state.snakeDots]
+    let head = snake[snake.length - 1];
+    if(head[0] == 100 || head[1] == 100 || head[0] < 0|| head[1] < 0) return (
+      alert("GAMEOVER!"),
+      this.setState({
+        snakeDots: [
+          [0,0],
+          [2,0],
+          [4,0],
+        ],
+        food: randomFood(),
+        direction: "RIGHT"
+      })
+    )
    }
 
   render() {
