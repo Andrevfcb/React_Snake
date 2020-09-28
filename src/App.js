@@ -21,12 +21,12 @@ class App extends Component {
       [4,0],
     ],
     food: randomFood(),
-    direction: "RIGHT"
+    direction: "RIGHT",
+    start: false
   }
 
   componentDidMount() {
-    setInterval(this.moveSnake, 100);
-    document.onkeydown = this.onKeyDown;
+      document.onkeydown = this.onKeyDown
   }
 
   componentDidUpdate() {
@@ -34,6 +34,7 @@ class App extends Component {
     this.checkIfOutOfBorder();
     this.checkIfCollapsed();
   }
+
 
   moveSnake = () => {
     let dots = [...this.state.snakeDots];
@@ -60,6 +61,9 @@ class App extends Component {
   }
 
   onKeyDown = (e) => {
+    if (this.state.start === false && e.keyCode === 39) {
+      setInterval(this.moveSnake, 100)
+      this.state.start = true}
     switch (e.keyCode) {
       case 38:
          this.setState({direction: 'UP'})
