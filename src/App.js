@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Snake from './Snake';
 import Food from './Food';
+import Results from './Results';
 
 const randomFood = () => {
   let max = 98;
@@ -22,7 +23,10 @@ class App extends Component {
     ],
     food: randomFood(),
     direction: "RIGHT",
-    start: false
+    start: false,
+    numberOfDots: 0,
+    bestResult: 0,
+    numberOfGames: 0
   }
 
   componentDidMount() {
@@ -86,7 +90,8 @@ class App extends Component {
     let food = this.state.food;
     if(head[0] == food[0] && head[1] == food[1]) return (
       this.setState({
-        food: randomFood()
+        food: randomFood(),
+        numberOfDots: this.state.numberOfDots + 1
       }),
       snake.unshift([]),
       this.setState({
@@ -110,8 +115,16 @@ class App extends Component {
     })
   }
 
+  startTitle = () => {
+    if(!this.state.start)return <h3>NACIŚNIJ STRZAŁKĘ W PRAWO BY ZACZĄĆ</h3>
+    else return null
+  }
+
   onGameOver() {
     alert("GAMEOVER!")
+    if (this.state.numberOfDots > this.state.bestResult){
+      this.setState({bestResult: this.state.numberOfDots})
+    }
       this.setState({
         snakeDots: [
           [0,0],
@@ -119,16 +132,22 @@ class App extends Component {
           [4,0],
         ],
         food: randomFood(),
-        direction: "RIGHT"
+        direction: "RIGHT",
+        numberOfDots: 0,
+        numberOfGames: this.state.numberOfGames + 1
       })
   }
 
   render() {
   return (
+    <>
+      <Results numberOfGames={this.state.numberOfGames} bestResult={this.state.bestResult} startTitle={this.startTitle()} />
+      {/* <Results numberOfGames={this.state.numberOfGames} bestResult={this.state.bestResult} /> */}
     <div className="game-area">
       <Snake snakeDot={this.state.snakeDots}/>
       <Food food={this.state.food}/>
     </div>
+    </>
   );
 }}
 

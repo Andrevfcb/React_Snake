@@ -3,7 +3,7 @@
   width: 600px;
   height: 600px;
   border: 2px solid black;
-  top: 50vh;
+  top: 40vh;
   left: 50vw;
   transform: translate(-50%, -50%);
 }
@@ -22,4 +22,27 @@
   width: 2%;
   height: 2%;
   border-radius: 50%;
+}
+
+.results {
+  display: flex;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.results .results-best {
+  flex-grow: 1;
+  font-size: large;
+}
+
+.results .results-start {
+  height: 50px;
+  width: 656px;
+  color: red;
+  flex-grow: 2;
+}
+
+.results .results-games {
+  flex-grow: 1;
+  font-size: large;
 }
