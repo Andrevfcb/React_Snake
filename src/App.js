@@ -121,7 +121,7 @@ class App extends Component {
   }
 
   onGameOver() {
-    alert("GAMEOVER!")
+    alert(`Przegrałeś! Twój wynik to: ${this.state.numberOfDots}`)
     if (this.state.numberOfDots > this.state.bestResult){
       this.setState({bestResult: this.state.numberOfDots})
     }
