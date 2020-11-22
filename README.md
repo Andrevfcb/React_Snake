@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-You can visit this game on the link https://andrevfcb.github.io/React_Snake/
+You can visit this game at the link https://andrevfcb.github.io/React_Snake/
 
 ## Available Scripts
 
