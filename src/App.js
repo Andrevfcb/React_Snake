@@ -26,14 +26,16 @@ class App extends Component {
     start: false,
     numberOfDots: 0,
     bestResult: 0,
-    numberOfGames: 0
+    numberOfGames: 0,
+    onTail: false,
+    kkk: false
   }
 
   componentDidMount() {
       document.onkeydown = this.onKeyDown
   }
 
-  componentDidUpdate() {
+  componentDidUpdate() { 
     this.checkIfEat();
     this.checkIfOutOfBorder();
     this.checkIfCollapsed();
@@ -89,15 +91,16 @@ class App extends Component {
     let head = snake[snake.length - 1];
     let food = this.state.food;
     if(head[0] == food[0] && head[1] == food[1]) return (
-      this.setState({
+      this.setState(prevState => {
+        return {
         food: randomFood(),
-        numberOfDots: this.state.numberOfDots + 1
-      }),
+        numberOfDots: prevState.numberOfDots + 1
+      }}),
       snake.unshift([]),
       this.setState({
         snakeDots: snake
-      }))
-    
+      })
+      )
    }
 
   checkIfOutOfBorder = () => {
@@ -116,12 +119,12 @@ class App extends Component {
   }
 
   startTitle = () => {
-    if(!this.state.start)return <h3>NACIŚNIJ STRZAŁKĘ W PRAWO BY ZACZĄĆ</h3>
+    if(!this.state.start)return <h3>PRESS RIGHT BUTTON TO START THE GAME</h3>
     else return null
   }
 
   onGameOver() {
-    alert(`Przegrałeś! Twój wynik to: ${this.state.numberOfDots}`)
+    alert(`GAME OVER! Your score: ${this.state.numberOfDots}`)
     if (this.state.numberOfDots > this.state.bestResult){
       this.setState({bestResult: this.state.numberOfDots})
     }
@@ -142,7 +145,6 @@ class App extends Component {
   return (
     <>
       <Results numberOfGames={this.state.numberOfGames} bestResult={this.state.bestResult} startTitle={this.startTitle()} />
-      {/* <Results numberOfGames={this.state.numberOfGames} bestResult={this.state.bestResult} /> */}
     <div className="game-area">
       <Snake snakeDot={this.state.snakeDots}/>
       <Food food={this.state.food}/>
