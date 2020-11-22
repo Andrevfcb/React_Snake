@@ -26,9 +26,7 @@ class App extends Component {
     start: false,
     numberOfDots: 0,
     bestResult: 0,
-    numberOfGames: 0,
-    onTail: false,
-    kkk: false
+    numberOfGames: 0
   }
 
   componentDidMount() {
@@ -40,7 +38,6 @@ class App extends Component {
     this.checkIfOutOfBorder();
     this.checkIfCollapsed();
   }
-
 
   moveSnake = () => {
     let dots = [...this.state.snakeDots];
